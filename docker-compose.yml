@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  hellocontainers.api:
+    image: ${DOCKER_REGISTRY-}hellocontainersapi
+    build:
+      context: ./HelloContainers.Api
+      dockerfile: Dockerfile
+
+  hellocontainers.web:
+    image: ${DOCKER_REGISTRY-}hellocontainersweb
+    build:
+      context: ./HelloContainers.Web
+      dockerfile: Dockerfile
+    depends_on:
+      - hellocontainers.api
+

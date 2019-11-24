@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  hellocontainers.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8080:80"
+
+  hellocontainers.web:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "9090:80"
+
