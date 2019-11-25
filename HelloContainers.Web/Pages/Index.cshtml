@@ -12,9 +12,10 @@
     {
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">Date : @Model.WeatherItems[i].Date.ToShortDateString()</h5>
+                <h5 class="card-title">City : @Model.WeatherItems[i].CityName </h5>
+                <p class="card-text"><small class="text-muted">Date : @Model.WeatherItems[i].Date.ToShortDateString()</small></p>
                 <p class="card-text"><small class="text-muted">Temperature : @Model.WeatherItems[i].TemperatureC</small></p>
-                <p class="card-text"><small class="text-muted">Temperature : @Model.WeatherItems[i].Summary</small></p>
+                <p class="card-text"><small class="text-muted">Summary : @Model.WeatherItems[i].Summary</small></p>
             </div>
         </div>
     }

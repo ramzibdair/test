@@ -12,4 +12,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "9090:80"
-
+  db:
+    environment:
+      SA_PASSWORD: "P@ssw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"

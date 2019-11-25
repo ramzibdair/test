@@ -6,7 +6,8 @@ services:
     build:
       context: ./HelloContainers.Api
       dockerfile: Dockerfile
-
+    depends_on:
+      - db
   hellocontainers.web:
     image: ${DOCKER_REGISTRY-}hellocontainersweb
     build:
@@ -14,4 +15,12 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - hellocontainers.api
-
+  db:
+    image: "microsoft/mssql-server-linux"
+    environment:
+      SA_PASSWORD: "P@ssw0rd"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - sql-datavolume:/var/opt/mssql
+volumes:
+  sql-datavolume:
