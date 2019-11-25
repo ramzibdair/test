@@ -4,12 +4,14 @@ services:
   hellocontainers.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionString=Data Source=db;Initial Catalog=HelloContainers;User Id=sa;Password=P@ssw0rd
     ports:
       - "8080:80"
 
   hellocontainers.web:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      
     ports:
       - "9090:80"
   db:
