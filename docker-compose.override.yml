@@ -11,6 +11,7 @@ services:
   hellocontainers.web:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ApiBaseUrl=http://hellocontainers.api
       
     ports:
       - "9090:80"
