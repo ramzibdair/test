@@ -1,14 +1,15 @@
-﻿using System;
+﻿using HelloContainers.Api.Data;
+using HelloContainers.Api.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HelloContainers.Api.Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace HelloContainers.Api.Controllers
 {
+
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -18,20 +19,18 @@ namespace HelloContainers.Api.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IConfiguration _config;
+        private readonly HelloContainersDbContext _dbContext;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration config)
+
+        public WeatherForecastController(HelloContainersDbContext context)
         {
-            _logger = logger;
-            _config = config;
+            _dbContext = context;
         }
 
-
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IEnumerable<WeatherForecast>> Get()
         {
-            List<City> cities = GetCities();
+            List<City> cities = await GetCities();
 
             var rng = new Random();
             return Enumerable.Range(1, 3).Select(index => new WeatherForecast
@@ -44,11 +43,9 @@ namespace HelloContainers.Api.Controllers
             .ToArray();
         }
 
-        private List<City> GetCities()
+        private async Task<List<City>> GetCities()
         {
-            CitiesData data = new CitiesData(_config);
-
-            return data.GetCities();
+            return await _dbContext.Cities.ToListAsync();
         }
     }
 }

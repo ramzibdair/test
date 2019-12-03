@@ -1,6 +1,7 @@
+using HelloContainers.Api.Data;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using System.IO;
 
 namespace HelloContainers.Api
@@ -11,17 +12,23 @@ namespace HelloContainers.Api
         {
             var configuration = GetConfiguration();
 
-            CreateHostBuilder(configuration, args).Build().Run();
+            var host = BuildWebHost(configuration, args);
+
+            host.MigrateDbContext<HelloContainersDbContext>((context, services) =>
+            {
+                new HelloContainersDbContextSeed()
+                    .SeedAsync(context)
+                    .Wait();
+            });
+
+            host.Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(IConfiguration configuration, string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>()
-                    .UseConfiguration(configuration);
-                });
-
+        public static IWebHost BuildWebHost(IConfiguration configuration, string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>()
+                .UseConfiguration(configuration)
+                .Build();
 
         private static IConfiguration GetConfiguration()
         {
