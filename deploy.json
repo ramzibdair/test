@@ -87,7 +87,15 @@
                 }
               }
             ],
-            "restartPolicy": "Always"
+            "restartPolicy": "Always",
+            "tolerations": [
+              {
+                "key": "App-DEV",
+                "operator": "Equal",
+                "value": "maroof-api",
+                "effect": "NoSchedule"
+              }
+            ]
           }
         },
         "strategy": {}
