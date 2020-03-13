@@ -92,7 +92,7 @@
               {
                 "key": "key",
                 "operator": "Equal",
-                "value": "maroof-api",
+                "value": "App-DEV",
                 "effect": "NoSchedule"
               }
             ]
