@@ -3,6 +3,7 @@
   "kind": "Service",
   "metadata": {
     "name": "internal-app",
+    "namespace": "app-dev",
     "annotations": {
       "service.beta.kubernetes.io/azure-load-balancer-internal": "true"
     }
