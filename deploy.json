@@ -90,7 +90,7 @@
             "restartPolicy": "Always",
             "tolerations": [
               {
-                "key": "App-DEV",
+                "key": "key",
                 "operator": "Equal",
                 "value": "maroof-api",
                 "effect": "NoSchedule"
